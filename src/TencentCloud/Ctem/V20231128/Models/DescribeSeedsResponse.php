@@ -18,19 +18,26 @@ namespace TencentCloud\Ctem\V20231128\Models;
 use TencentCloud\Common\AbstractModel;
 
 /**
- * CreateEnterprise返回参数结构体
+ * DescribeSeeds返回参数结构体
  *
- * @method integer getId() 获取Id
- * @method void setId(integer $Id) 设置Id
+ * @method integer getTotal() 获取总数
+ * @method void setTotal(integer $Total) 设置总数
+ * @method array getList() 获取种子列表
+ * @method void setList(array $List) 设置种子列表
  * @method string getRequestId() 获取唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
  * @method void setRequestId(string $RequestId) 设置唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
  */
-class CreateEnterpriseResponse extends AbstractModel
+class DescribeSeedsResponse extends AbstractModel
 {
     /**
-     * @var integer Id
+     * @var integer 总数
      */
-    public $Id;
+    public $Total;
+
+    /**
+     * @var array 种子列表
+     */
+    public $List;
 
     /**
      * @var string 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
@@ -38,7 +45,8 @@ class CreateEnterpriseResponse extends AbstractModel
     public $RequestId;
 
     /**
-     * @param integer $Id Id
+     * @param integer $Total 总数
+     * @param array $List 种子列表
      * @param string $RequestId 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     function __construct()
@@ -54,8 +62,17 @@ class CreateEnterpriseResponse extends AbstractModel
         if ($param === null) {
             return;
         }
-        if (array_key_exists("Id",$param) and $param["Id"] !== null) {
-            $this->Id = $param["Id"];
+        if (array_key_exists("Total",$param) and $param["Total"] !== null) {
+            $this->Total = $param["Total"];
+        }
+
+        if (array_key_exists("List",$param) and $param["List"] !== null) {
+            $this->List = [];
+            foreach ($param["List"] as $key => $value){
+                $obj = new DisplaySeed();
+                $obj->deserialize($value);
+                array_push($this->List, $obj);
+            }
         }
 
         if (array_key_exists("RequestId",$param) and $param["RequestId"] !== null) {
